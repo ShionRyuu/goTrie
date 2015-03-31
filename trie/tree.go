@@ -9,13 +9,13 @@ const (
 	Repl  = "*"
 )
 
-/*
- *
- */
 type TrieTree struct {
 	root *TrieNode
 }
 
+/*
+ * Create a new TrieTree
+ */
 func NewTrieTree() *TrieTree {
 	tree := &TrieTree{
 		root: NewTrieNode(),
@@ -24,7 +24,7 @@ func NewTrieTree() *TrieTree {
 }
 
 /*
- *
+ * Add a sensitive word
  */
 func (tree *TrieTree) Add(str string) {
 	var node *TrieNode = tree.root
@@ -32,11 +32,12 @@ func (tree *TrieTree) Add(str string) {
 	for _, c := range str {
 		node = node.add(c)
 	}
+	// end of the word
 	node.setLeaf(true)
 }
 
 /*
- *
+ * Filter sensitive words in the string
  */
 func (tree *TrieTree) Filter(str string) string {
 	str = strings.Trim(strings.ToLower(str), Split)
@@ -49,9 +50,9 @@ func (tree *TrieTree) Filter(str string) string {
 		for j := i; j < length; j++ {
 			e := words[j]
 			if v, ok := node.get(e); ok {
-				// leaf, sensitive worlds
+				// leaf, sensitive word
 				if v.isLeaf() {
-					// append
+					// replace sensitive word
 					filter = append(filter, []rune(strings.Repeat(Repl, j-i+1))...)
 					i = j + 1
 					break

@@ -2,16 +2,13 @@ package trie
 
 import ()
 
-/*
- *
- */
 type TrieNode struct {
-	child map[rune]*TrieNode
-	leaf  bool
+	child map[rune]*TrieNode // subtree
+	leaf  bool               // end of a word
 }
 
 /*
- *
+ * Create new TrieNode
  */
 func NewTrieNode() *TrieNode {
 	node := &TrieNode{
@@ -22,7 +19,7 @@ func NewTrieNode() *TrieNode {
 }
 
 /*
- *
+ * Find subtree with the node as the root
  */
 func (node *TrieNode) get(e rune) (*TrieNode, bool) {
 	if v, ok := node.child[e]; ok {
@@ -32,14 +29,14 @@ func (node *TrieNode) get(e rune) (*TrieNode, bool) {
 }
 
 /*
- *
+ * Add child node
  */
 func (node *TrieNode) add(e rune) *TrieNode {
 	return node.addRune(e, false)
 }
 
 /*
- *
+ * Add leaf node
  */
 func (node *TrieNode) addRune(e rune, leaf bool) *TrieNode {
 	var childNode *TrieNode
@@ -53,16 +50,10 @@ func (node *TrieNode) addRune(e rune, leaf bool) *TrieNode {
 	return childNode
 }
 
-/*
- *
- */
 func (node *TrieNode) setLeaf(leaf bool) {
 	node.leaf = leaf
 }
 
-/*
- *
- */
 func (node *TrieNode) isLeaf() bool {
 	return node.leaf
 }

@@ -19,7 +19,3 @@ ShionRyuu <shionryuu@outlook.com>
 License
 ------
 goTrie is available under the [MIT License](http://shionryuu.mit-license.org/)
-
-Todo
-------
-Add Test
